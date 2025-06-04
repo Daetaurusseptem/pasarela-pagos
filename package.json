@@ -1,0 +1,29 @@
+{
+  "name": "pasarela",
+  "version": "1.0.0",
+  "description": "Aplicación web ligera para facilitar el cobro en línea de servicios mediante Stripe. Permite al cliente ingresar sus datos y el monto a pagar a través de un formulario sencillo. Al realizar el pago, el sistema registra la transacción y genera un comprobante descargable. Incluye un pequeño panel para consultar el historial de pagos realizados. > README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daetaurusseptem/pasarela-pagos.git"
+  },
+  "author": "Jaime Burciaga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daetaurusseptem/pasarela-pagos/issues"
+  },
+  "homepage": "https://github.com/Daetaurusseptem/pasarela-pagos#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29"
+  }
+}
