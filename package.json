@@ -4,7 +4,10 @@
   "description": "Aplicación web ligera para facilitar el cobro en línea de servicios mediante Stripe. Permite al cliente ingresar sus datos y el monto a pagar a través de un formulario sencillo. Al realizar el pago, el sistema registra la transacción y genera un comprobante descargable. Incluye un pequeño panel para consultar el historial de pagos realizados. > README.md",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,8 @@
     "pdfkit": "^0.13.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.29"
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.1.0"
   }
 }

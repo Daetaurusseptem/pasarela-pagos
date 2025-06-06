@@ -14,11 +14,11 @@ Aplicación ligera de ejemplo para recibir pagos en línea a través de Stripe. 
 2. Instala las dependencias y compila:
    ```
    npm install
-   npx tsc
+   npm run build   # o npm run dev durante desarrollo
    ```
 3. Ejecuta el servidor:
    ```
-   node dist/index.js
+   npm start
    ```
 4. Regístrate y accede:
    - `http://localhost:3000/register.html`
