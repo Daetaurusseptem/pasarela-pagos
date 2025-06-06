@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+</head>
+<body>
+  <h1>Registrarse</h1>
+  <form id="regForm">
+    <input type="text" name="username" placeholder="Usuario" required><br>
+    <input type="password" name="password" placeholder="Contraseña" required><br>
+    <input type="text" name="stripeSecret" placeholder="Clave secreta de Stripe (opcional)"><br>
+    <button type="submit">Crear</button>
+  </form>
+  <p id="msg"></p>
+  <a href="/login.html">Volver</a>
+  <script>
+    const form = document.getElementById('regForm');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        document.getElementById('msg').textContent = 'Usuario creado';
+      } else {
+        const r = await res.json();
+        document.getElementById('msg').textContent = r.message;
+      }
+    });
+  </script>
+</body>
+</html>
