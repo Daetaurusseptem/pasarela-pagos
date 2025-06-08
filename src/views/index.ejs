@@ -13,11 +13,11 @@
     <button type="submit">Pagar</button>
   </form>
   <p id="message"></p>
-  <a href="/history.html">Historial de pagos</a>
+  <a href="/history">Historial de pagos</a>
   <script>
     const token = localStorage.getItem('token');
     if (!token) {
-      window.location.href = '/login.html';
+      window.location.href = '/login';
     }
     const form = document.getElementById('paymentForm');
     form.addEventListener('submit', async e => {

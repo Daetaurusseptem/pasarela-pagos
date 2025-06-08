@@ -14,6 +14,7 @@ export default class Server {
 
   constructor() {
     this.configure();
+    this.pageRoutes();
     this.routes();
   }
 
@@ -21,6 +22,15 @@ export default class Server {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.static(path.join(__dirname, 'public')));
+    this.app.set('views', path.join(__dirname, 'views'));
+    this.app.set('view engine', 'ejs');
+  }
+
+  private pageRoutes() {
+    this.app.get('/', (_req, res) => res.render('index'));
+    this.app.get('/login', (_req, res) => res.render('login'));
+    this.app.get('/register', (_req, res) => res.render('register'));
+    this.app.get('/history', (_req, res) => res.render('history'));
   }
 
   private routes() {

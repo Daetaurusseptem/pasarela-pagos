@@ -9,11 +9,11 @@
   <table border="1" id="table">
     <tr><th>Nombre</th><th>Correo</th><th>Monto</th><th>Fecha</th></tr>
   </table>
-  <a href="/index.html">Regresar</a>
+  <a href="/">Regresar</a>
   <script>
     const token = localStorage.getItem('token');
     if (!token) {
-      window.location.href = '/login.html';
+      window.location.href = '/login';
     }
     fetch('/api/payments', { headers: { 'Authorization': 'Bearer ' + token } })
       .then(r => r.json())

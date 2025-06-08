@@ -2,31 +2,30 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar sesión</title>
+  <title>Registro</title>
 </head>
 <body>
-  <h1>Login</h1>
-  <form id="loginForm">
+  <h1>Registrarse</h1>
+  <form id="regForm">
     <input type="text" name="username" placeholder="Usuario" required><br>
     <input type="password" name="password" placeholder="Contraseña" required><br>
-    <button type="submit">Entrar</button>
+    <input type="text" name="stripeSecret" placeholder="Clave secreta de Stripe (opcional)"><br>
+    <button type="submit">Crear</button>
   </form>
   <p id="msg"></p>
-  <a href="/register.html">Registrarse</a>
+  <a href="/login">Volver</a>
   <script>
-    const form = document.getElementById('loginForm');
+    const form = document.getElementById('regForm');
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form));
-      const res = await fetch('/api/login', {
+      const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        const result = await res.json();
-        localStorage.setItem('token', result.token);
-        window.location.href = '/index.html';
+        document.getElementById('msg').textContent = 'Usuario creado';
       } else {
         const r = await res.json();
         document.getElementById('msg').textContent = r.message;
