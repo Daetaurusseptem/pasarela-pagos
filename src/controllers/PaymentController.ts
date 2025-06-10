@@ -1,37 +1,21 @@
-import Server from './server';
-
-const server = new Server();
-server.start();
-
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import { Request, Response } from 'express';
 import Stripe from 'stripe';
-import Payment from './models/Payment';
 import PDFDocument from 'pdfkit';
-import path from 'path';
-
-dotenv.config();
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+import Payment from '../models/Payment';
+import { IUser } from '../models/User';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
-const stripe = new Stripe(stripeSecret, {
-  apiVersion: '2023-10-16'
-});
+const globalStripe = new Stripe(stripeSecret, { apiVersion: '2023-10-16' });
 
-mongoose.connect(process.env.MONGO_URI || '')
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('Mongo error', err));
-
-app.post('/api/payments', async (req, res) => {
+export async function createPayment(req: Request, res: Response) {
   try {
     const { name, email, amount, token } = req.body;
+    const user = (req as any).user as IUser;
+    const clientStripe = user.stripeSecret
+      ? new Stripe(user.stripeSecret, { apiVersion: '2023-10-16' })
+      : globalStripe;
 
-    const charge = await stripe.paymentIntents.create({
+    const charge = await clientStripe.paymentIntents.create({
       amount: Math.round(amount * 100),
       currency: 'usd',
       payment_method: token,
@@ -43,7 +27,8 @@ app.post('/api/payments', async (req, res) => {
       name,
       email,
       amount,
-      stripeId: charge.id
+      stripeId: charge.id,
+      user: user._id
     });
 
     const doc = new PDFDocument();
@@ -61,20 +46,15 @@ app.post('/api/payments', async (req, res) => {
       res.setHeader('Content-Disposition', `attachment; filename=receipt-${payment._id}.pdf`);
       res.send(result);
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Payment failed' });
   }
-});
+}
 
-app.get('/api/payments', async (_req, res) => {
-  const payments = await Payment.find().sort({ createdAt: -1 });
+export async function listPayments(req: Request, res: Response) {
+  const user = (req as any).user as IUser;
+  const query = user.role === 'admin' ? {} : { user: user._id };
+  const payments = await Payment.find(query).sort({ createdAt: -1 });
   res.json(payments);
-});
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+}

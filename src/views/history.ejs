@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de pagos</title>
+</head>
+<body>
+  <h1>Pagos realizados</h1>
+  <table border="1" id="table">
+    <tr><th>Nombre</th><th>Correo</th><th>Monto</th><th>Fecha</th></tr>
+  </table>
+  <a href="/">Regresar</a>
+  <script>
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+    }
+    fetch('/api/payments', { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(r => r.json())
+      .then(payments => {
+        const table = document.getElementById('table');
+        payments.forEach(p => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${p.name}</td><td>${p.email}</td><td>$${p.amount}</td><td>${new Date(p.createdAt).toLocaleString()}</td>`;
+          table.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>
