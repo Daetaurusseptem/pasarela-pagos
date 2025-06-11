@@ -7,9 +7,9 @@ const jwtSecret = process.env.JWT_SECRET || 'secret';
 
 export async function register(req: Request, res: Response) {
   try {
-    const { username, password, stripeSecret } = req.body;
+    const { username, password } = req.body;
     const hashed = await bcrypt.hash(password, 10);
-    await User.create({ username, password: hashed, stripeSecret });
+    await User.create({ username, password: hashed });
     res.json({ message: 'Usuario creado' });
   } catch (err) {
     console.error(err);
