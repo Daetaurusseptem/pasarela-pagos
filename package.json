@@ -20,21 +20,24 @@
   },
   "homepage": "https://github.com/Daetaurusseptem/pasarela-pagos#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "ejs": "^3.1.9",
     "express": "^5.1.0",
-    "mongoose": "^8.15.1",
-
     "jsonwebtoken": "^9.0.2",
-    "typescript": "^5.8.3",
-    "stripe": "^14.0.0",
+    "mongoose": "^8.15.1",
     "pdfkit": "^0.13.0",
-    "ejs": "^3.1.9"
-
+    "stripe": "^14.0.0",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.29",
-    "ts-node": "^10.9.2",
-    "nodemon": "^3.1.0"
+    "@types/pdfkit": "^0.13.9",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
   }
 }

@@ -4,7 +4,7 @@ import User, { IUser } from '../models/User';
 
 const jwtSecret = process.env.JWT_SECRET || 'secret';
 
-export async function auth(req: Request, res: Response, next: NextFunction) {
+export async function auth(req: Request, res: Response, next: NextFunction): Promise<any> {
   const header = req.headers.authorization;
   if (!header) return res.status(401).json({ message: 'Sin token' });
   const token = header.split(' ')[1];

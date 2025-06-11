@@ -5,9 +5,11 @@ export interface IPayment extends Document {
   email: string;
   amount: number;
   stripeId: string;
+  user: Schema.Types.ObjectId;
 
   createdAt: Date;
 }
+
 
 const PaymentSchema = new Schema<IPayment>({
   name: { type: String, required: true },
