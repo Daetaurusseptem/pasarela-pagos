@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import path from 'path';
+import { join } from 'node:path';
 import authRoutes from './routes/authRoutes';
 import paymentRoutes from './routes/paymentRoutes';
 
@@ -21,8 +21,8 @@ export default class Server {
   private configure() {
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(express.static(path.join(__dirname, 'public')));
-    this.app.set('views', path.join(__dirname, 'views'));
+    this.app.use(express.static(join(__dirname, 'public')));
+    this.app.set('views', join(__dirname, 'views'));
     this.app.set('view engine', 'ejs');
   }
 

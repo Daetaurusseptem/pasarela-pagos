@@ -11,9 +11,7 @@ export async function createPayment(req: Request, res: Response) {
   try {
     const { name, email, amount, token } = req.body;
     const user = (req as any).user as IUser;
-    const clientStripe = user.stripeSecret
-      ? new Stripe(user.stripeSecret, { apiVersion: '2023-10-16' })
-      : globalStripe;
+    const clientStripe = globalStripe;
 
     const charge = await clientStripe.paymentIntents.create({
       amount: Math.round(amount * 100),
