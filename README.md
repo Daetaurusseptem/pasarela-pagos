@@ -29,9 +29,17 @@ Esta versión requiere **Node.js 22** o superior y usa la biblioteca `bcrypt` pa
 5. Regístrate y accede:
    - `http://localhost:3000/register`
    - `http://localhost:3000/login`
+   
 6. Abre `http://localhost:3000/` en tu navegador para realizar un pago una vez autenticado y consulta el historial en `http://localhost:3000/history`.
 
+
 La aplicación utiliza una única clave secreta de Stripe y la cadena de conexión de Mongo definidas en el archivo `.env`. Después de compilar puedes ejecutar el servidor con:
+
+   npx tsc
+   ```
+3. Ejecuta el servidor:
+
+
    ```
    node dist/index.js
    ```
