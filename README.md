@@ -27,14 +27,15 @@ Aplicación ligera de ejemplo para recibir pagos en línea a través de Stripe. 
    - `http://localhost:3000/login`
 5. Abre `http://localhost:3000/` en tu navegador para realizar un pago una vez autenticado y consulta el historial en `http://localhost:3000/history`.
 
+
 La aplicación utiliza una única clave secreta de Stripe definida en las variables de entorno. Solo necesitas registrar un usuario para acceder al historial de pagos.
-=======
+
    npx tsc
    ```
 3. Ejecuta el servidor:
+
    ```
    node dist/index.js
    ```
-4. Abre `http://localhost:3000/index.html` en tu navegador para realizar un pago.
 
 Este proyecto es únicamente demostrativo y no debe usarse en producción sin las medidas de seguridad adecuadas.
