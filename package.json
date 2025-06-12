@@ -19,8 +19,11 @@
     "url": "https://github.com/Daetaurusseptem/pasarela-pagos/issues"
   },
   "homepage": "https://github.com/Daetaurusseptem/pasarela-pagos#readme",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.9",
@@ -37,6 +40,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.29",
     "@types/pdfkit": "^0.13.9",
+    "@types/bcrypt": "^5.0.0",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2"
   }
